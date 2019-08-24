@@ -1,9 +1,10 @@
 const feathers = require('@feathersjs/feathers');
+const { Forbidden } = require('@feathersjs/errors');
 
 const authorize = require('.');
 
 const {
-  casl: { getAllowedRules },
+  casl: { getAllowedRules, getForbiddenRules },
 } = require('./authorize.fixtures');
 
 const addUserHook = rules => {
@@ -21,7 +22,7 @@ const addUserHook = rules => {
 
 describe("'authorize' hook", () => {
   let app;
-  beforeAll(() => {
+  beforeEach(() => {
     app = feathers();
     app.use('/', {
       find: async params => {
@@ -38,5 +39,15 @@ describe("'authorize' hook", () => {
     });
     const res = await app.service('/').find();
     expect(res).toBe('OK');
+  });
+
+  test('it should return 403', async () => {
+    app.service('/').hooks({
+      before: {
+        all: [addUserHook(getForbiddenRules()), authorize()],
+      },
+    });
+
+    expect(app.service('/').find).toThrow(Forbidden);
   });
 });
