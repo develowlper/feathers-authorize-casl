@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "test": "jest --coverage",
-    "release": "standard-version"
+    "release": "standard-version",
+    "release:dry": "npm run release -- --dry-run"
   },
   "repository": {
     "type": "git",
