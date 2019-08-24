@@ -1,12 +1,35 @@
 {
   "name": "feathers-authorize-casl",
-  "version": "0.1.1",
+  "version": "0.1.0",
   "description": "Using CASL for feahters authotization",
   "main": "src/index.js",
   "scripts": {
     "test": "jest --coverage",
     "release": "standard-version",
     "release:dry": "npm run release -- --dry-run"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/config-conventional": "^8.1.0",
+    "@commitlint/cli": "^8.1.0",
+    "eslint": "^6.2.1",
+    "eslint-config-prettier": "^6.1.0",
+    "eslint-plugin-jest": "^22.15.2",
+    "eslint-plugin-prettier": "^3.1.0",
+    "husky": "^3.0.4",
+    "jest": "^24.9.0",
+    "prettier": "^1.18.2",
+    "standard-version": "^7.0.0"
+  },
+  "dependencies": {
+    "@casl/ability": "^3.2.0",
+    "@casl/mongoose": "^2.3.1",
+    "@feathersjs/errors": "^3.3.6",
+    "@feathersjs/feathers": "^3.3.1"
   },
   "repository": {
     "type": "git",
@@ -17,20 +40,5 @@
   "bugs": {
     "url": "https://github.com/develowlper/feathers-authorize-casl/issues"
   },
-  "homepage": "https://github.com/develowlper/feathers-authorize-casl#readme",
-  "devDependencies": {
-    "eslint": "^6.2.1",
-    "eslint-config-prettier": "^6.1.0",
-    "eslint-plugin-jest": "^22.15.2",
-    "eslint-plugin-prettier": "^3.1.0",
-    "jest": "^24.9.0",
-    "prettier": "^1.18.2",
-    "standard-version": "^7.0.0"
-  },
-  "dependencies": {
-    "@casl/ability": "^3.2.0",
-    "@casl/mongoose": "^2.3.1",
-    "@feathersjs/errors": "^3.3.6",
-    "@feathersjs/feathers": "^3.3.1"
-  }
+  "homepage": "https://github.com/develowlper/feathers-authorize-casl#readme"
 }
