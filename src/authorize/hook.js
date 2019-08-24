@@ -22,12 +22,13 @@ function defineAbilitiesFor({ rules }) {
 const authorize = () => {
   return async context => {
     const {
-      id,
+      path,
       method: action,
       data: dataProp,
       params: { query: queryProp, user },
     } = context;
     const service = name ? context.app.service(name) : context.service;
+    const serviceName = name || path;
     const ability = defineAbilitiesFor(user);
     const data = { ...dataProp };
     const paramsProp = { ...context.params, ability };
@@ -38,7 +39,7 @@ const authorize = () => {
       }
     };
 
-    if (method === 'create') {
+    if (action === 'create') {
       data[TYPE_KEY] = serviceName;
       throwUnlessCan('create', data);
       return {
@@ -47,7 +48,7 @@ const authorize = () => {
       };
     }
 
-    if (method === 'find') {
+    if (action === 'find') {
       const query = toMongoQuery(ability, serviceName, action);
       if (!query) {
         throw new Forbidden(`You are not allowed to ${action} ${serviceName}`);

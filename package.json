@@ -4,7 +4,8 @@
   "description": "Using CASL for feahters authotization",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "release": "standard-version"
   },
   "repository": {
     "type": "git",
@@ -22,10 +23,12 @@
     "eslint-plugin-jest": "^22.15.2",
     "eslint-plugin-prettier": "^3.1.0",
     "jest": "^24.9.0",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "standard-version": "^7.0.0"
   },
   "dependencies": {
     "@casl/ability": "^3.2.0",
+    "@casl/mongoose": "^2.3.1",
     "@feathersjs/errors": "^3.3.6",
     "@feathersjs/feathers": "^3.3.1"
   }

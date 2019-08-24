@@ -47,7 +47,12 @@ describe("'authorize' hook", () => {
         all: [addUserHook(getForbiddenRules()), authorize()],
       },
     });
-
-    expect(app.service('/').find).toThrow(Forbidden);
+    try {
+      const res = await app.service('/').find();
+    } catch (err) {
+      expect(err.code).toBe(403);
+      return;
+    }
+    throw new Error('error');
   });
 });
